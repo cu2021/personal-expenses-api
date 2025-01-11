@@ -1,0 +1,22 @@
+{
+  "name": "personal-expenses-api",
+  "version": "1.0.0",
+  "description": "Backend API for managing personal expenses.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "Othman M. O. Shbeir",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
+    "bson": "^6.10.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.12.0",
+    "nodemon": "^3.1.9"
+  }
+}

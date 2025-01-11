@@ -3,9 +3,15 @@ const middleware = require("./middlewares");
 const routes = require("./routes");
 const createError = require("http-errors");
 const { returnJson } = require("./my_modules/json_response");
+//make returnJson global
+global.returnJson = returnJson;
 
+//create express application
 app = express();
 
+/**
+ * Handling Unhandled Rejection
+ */
 process.on("unhandledRejection", (reason) => {
   console.log(reason);
   process.exit(1);

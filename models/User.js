@@ -1,5 +1,6 @@
-const { hashSync } = require("bcryptjs");
+const { hashSync, compareSync } = require("bcryptjs");
 const { dbConnection } = require("../configurations");
+const { userValidator, loginValidator } = require("../validators");
 
 class User {
   constructor(userData) {
@@ -67,6 +68,48 @@ class User {
           }
         } catch (err) {
           reject(err);
+        }
+      });
+    });
+  }
+
+  static login(loginData) {
+    return new Promise((resolve, reject) => {
+      //validate the login data after it is recieved
+      const validation = loginValidator.validate(loginData);
+      // if there is a validation error
+      if (validation.error) {
+        resolve({
+          status: false,
+          message: validation.error.message,
+          
+        });
+      }
+
+      dbConnection("users", async (collection) => {
+        try {
+          //get the user from the database
+          const user = await collection.findOne({ username: loginData.username });
+          
+
+          //check the password and username correctness.
+          if (!user || !compareSync(loginData.password, user.password)) {
+            resolve({
+              status: false,
+              message: "The password or usename is not correct!",
+            });
+          } else {
+            // in this section, all login credentials must be correct
+            resolve({
+              status: true,
+              data: user,
+            });
+          }
+        } catch (err) {
+          reject({
+            status: false,
+            message: err.message,
+          });
         }
       });
     });

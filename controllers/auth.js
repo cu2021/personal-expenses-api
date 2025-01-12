@@ -1,5 +1,6 @@
 const { User } = require("../models");
 const createError = require("http-errors");
+const jwt = require("jsonwebtoken");
 
 const signup = (req, res, next) => {
   const userData = req.body;
@@ -33,6 +34,30 @@ const signup = (req, res, next) => {
     });
 };
 
+const login = (req, res, next) => {
+  User.login(req.body)
+    .then((result) => {
+      if (result.status) {
+        const jwtSecreteKey = process.env.PRIVATE_KEY;
+        const token = jwt.sign(
+          {
+            userId: result.data._id,
+            name: result.data.name
+          },
+          jwtSecreteKey,{
+            expiresIn:"10h"
+          }
+        );
+        return returnJson(res, 200, true, "Login Successfully", { token });
+      } else {
+        return next(createError(400, result.message));
+      }
+    })
+    .catch((err) => {
+      return next(createError(500, err.message));
+    });
+};
+
 module.exports = {
-  signup,
+  signup, login
 };

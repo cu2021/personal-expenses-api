@@ -39,7 +39,10 @@ app.use((req, res, next) => {
  * Error Handler
  */
 app.use((error, req, res, next) => {
-  return returnJson(res, error.statusCode, false, error.message, null);
+  console.error(error);
+  const statusCode = error.statusCode || 500;
+  return returnJson(res, statusCode, false, error.message, null);
 });
+
 
 module.exports = app;

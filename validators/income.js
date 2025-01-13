@@ -1,15 +1,23 @@
 const Joi = require("@hapi/joi");
 
-const schema = Joi.object({
+const incomeSchema = Joi.object({
   _user_id: Joi.string().required(),
-  incomeSource: Joi.string().required(),
-  incomeValue: Joi.number().min(0).required(),
+  income_source: Joi.string().required(),
+  income_value: Joi.number().min(0).required(),
   currency: Joi.string().default("USD"),
   description: Joi.string().max(500).optional(),
-  date: Joi.date()
-    .default(Date.now())
-    .max("now")
-    .message("income recieved date mustn't be in the future"),
+  created_at: Joi.date().default(Date.now()).max("now"),
+  month: Joi.number()
+    .default(() => {
+      return new Date().getMonth() + 1;
+    })
+    .min(1)
+    .max(12),
+  year: Joi.number()
+    .default(() => {
+      return new Date().getFullYear();
+    })
+    .max(),
 });
 
-module.exports = schema;
+module.exports = { incomeSchema };

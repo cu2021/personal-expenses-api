@@ -1,6 +1,6 @@
 const { ObjectId } = require("bson");
 const { Income } = require("../models");
-const createError = require("http-errors");
+const createError = require("http-errors")
 const { returnJson } = require("../my_modules/json_response");
 
 const addIncome = (req, res, next) => {
@@ -8,9 +8,11 @@ const addIncome = (req, res, next) => {
   const incomeData = req.body;
 
   incomeData._user_id = req._user_id;
-    
+  
+  // validate inputted incomeData
   const validation = Income.validate(incomeData);
   
+  //check validation error
   if (validation.error) {
     return next(createError(400, validation.error.message));
   }
@@ -23,6 +25,7 @@ const addIncome = (req, res, next) => {
     if (!result.status) {
       return next(createError(500));
     }
+    // Income insertion succeed.
     return returnJson(res, 200, true, "Income inserted successfully", {income:income.incomeData});
   });
 };

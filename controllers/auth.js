@@ -44,7 +44,7 @@ const login = (req, res, next) => {
         const jwtSecreteKey = process.env.PRIVATE_KEY;
         const token = jwt.sign(
           {
-            userId: result.data._id,
+            _user_id: result.data._id,
             name: result.data.name
           },
           jwtSecreteKey,{

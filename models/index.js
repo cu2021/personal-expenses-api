@@ -1,3 +1,4 @@
-module.exports= {
-    User: require("./User")
-}
+module.exports = {
+  User: require("./User"),
+  Income: require("./Income"),
+};

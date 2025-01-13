@@ -1,7 +1,9 @@
+// important imports
 const { User } = require("../models");
 const createError = require("http-errors");
 const jwt = require("jsonwebtoken");
 
+//signup function
 const signup = (req, res, next) => {
   const userData = req.body;
 
@@ -38,6 +40,7 @@ const login = (req, res, next) => {
   User.login(req.body)
     .then((result) => {
       if (result.status) {
+        //creat the token using json web token
         const jwtSecreteKey = process.env.PRIVATE_KEY;
         const token = jwt.sign(
           {
@@ -48,6 +51,7 @@ const login = (req, res, next) => {
             expiresIn:"10h"
           }
         );
+        // login success
         return returnJson(res, 200, true, "Login Successfully", { token });
       } else {
         return next(createError(400, result.message));

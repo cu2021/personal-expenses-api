@@ -8,5 +8,5 @@ module.exports = {
 
     app.use(express.json());
   },
-  
+  auth: require("./auth"),
 };

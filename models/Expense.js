@@ -1,3 +1,4 @@
+const { limit } = require("@hapi/joi/lib/common");
 const { dbConnection } = require("../configurations");
 const { expenseValidator } = require("../validators");
 
@@ -23,12 +24,55 @@ class Expense {
     });
   }
 
+  static getCurrentMonthExpenses(_user_id, month, year, skip, limit) {
+    return new Promise((resolve, reject) => {
+      dbConnection("expenses", async (collection) => {
+        try {
+          const expenses = await collection
+            .find({ _user_id: _user_id, month: month, year: year })
+            .limit(limit)
+            .skip(skip)
+            .toArray();
+
+          if (expenses) {
+            resolve({ status: true, data: expenses });
+          } else {
+            resolve({
+              status: true,
+              data: [],
+            });
+          }
+        } catch (err) {
+          reject({ status: false, message: err.message });
+        }
+      });
+    });
+  }
+
+  static getEpensesPageCount(_user_id, month, year, limit) {
+    return new Promise((resolve, reject) => {
+      dbConnection("expenses", async (collection) => {
+        try {
+          const count = await collection.count({
+            _user_id: _user_id,
+            month: month,
+            year: year,
+          });
+          const pages = Math.ceil(count / limit);
+
+          resolve({ status: true, pagesCount: pages });
+        } catch (err) {
+          resolve({ status: false, err });
+        }
+      });
+    });
+  }
+
   static validate(expenseData) {
     try {
       const validationResult = expenseValidator.validate(expenseData);
       return validationResult;
-    
-    }catch (err) {
+    } catch (err) {
       return err;
     }
   }

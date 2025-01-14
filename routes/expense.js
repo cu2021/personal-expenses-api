@@ -5,6 +5,12 @@ const { expenseController } = require("../controllers");
 
 const router = Router();
 
-router.post("/add", auth, expenseController.addExpense);
+router
+  .post("/add", auth, expenseController.addExpense)
+  .get(
+    "/currentMonthExpenses",
+    auth,
+    expenseController.getCurrentMonthExpenses
+  );
 
 module.exports = router;

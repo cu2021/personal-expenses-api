@@ -1,0 +1,625 @@
+{
+	"info": {
+		"_postman_id": "9e0680eb-3efb-4aba-ba71-8fa38552d036",
+		"name": "Personal Expenses Managment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18848009"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Sign Up",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Othman M. O. Shbeir122\",\n    \"email\": \"othman122@gmail.com\",\n    \"username\": \"oth101222\",\n    \"password\": \"123456789Aa122\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9099/auth/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "9099",
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sign Up Successful",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Othman M. O. Shbeir122\",\n    \"email\": \"othman1222@gmail.com\",\n    \"username\": \"oth1012222\",\n    \"password\": \"123456789Aa122\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:9099/auth/signup",
+									"host": [
+										"localhost"
+									],
+									"port": "9099",
+									"path": [
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "85"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"55-ZAUBkRGJ83kncv94b/9nrQfOUng\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Jan 2025 12:58:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": {\n        \"status\": true,\n        \"message\": \"User has been created successfully\"\n    },\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"oth1012\",\n    \"password\":\"123456789Aa12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9099/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "9099",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login successful",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\":\"oth1012222\",\n    \"password\":\"123456789Aa122\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:9099/auth/login",
+									"host": [
+										"localhost"
+									],
+									"port": "9099",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "298"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12a-TkwlMGOayEvbzp17QytiP52BlpE\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Jan 2025 13:00:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": {\n        \"status\": true,\n        \"message\": \"Login Successfully\"\n    },\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfdXNlcl9pZCI6IjY3ODdiMTBmMjY1YThhZWMxMDZhODZlMiIsIm5hbWUiOiJPdGhtYW4gTS4gTy4gU2hiZWlyMTIyIiwiaWF0IjoxNzM2OTQ2MDAzLCJleHAiOjE3MzY5ODIwMDN9.SPPfNY0_xZZlojzbJT76qXNUPaAt1y02hHFccmNX458\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Income",
+			"item": [
+				{
+					"name": "Add/Update Income",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfdXNlcl9pZCI6IjY3ODI3NjEzMjUwODU2OWVhNjg2OWE2ZCIsIm5hbWUiOiJPdGhtYW4gTS4gTy4gU2hiZWlyMTIiLCJpYXQiOjE3MzY3NzU3NTcsImV4cCI6MTczNjgxMTc1N30.I-ZQKxe2timCM9rumNB5OoukEEkHTHMg9CtcvsC4Duo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"income_source\": \"Salary\",\n    \"income_value\": 75000,\n    \"month\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9099/income/add",
+							"host": [
+								"localhost"
+							],
+							"port": "9099",
+							"path": [
+								"income",
+								"add"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add/Update Income Successful",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"income_source\": \"Salary\",\n    \"income_value\": 6000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:9099/income/add",
+									"host": [
+										"localhost"
+									],
+									"port": "9099",
+									"path": [
+										"income",
+										"add"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "219"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"db-28nBeSCXUaiG4bu3UNi5f+WeNNc\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Jan 2025 13:02:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": {\n        \"status\": true,\n        \"message\": \"Income inserted successfully\"\n    },\n    \"data\": {\n        \"income\": {\n            \"income_source\": \"Salary\",\n            \"income_value\": 6000,\n            \"_user_id\": \"6787b10f265a8aec106a86e2\",\n            \"created_at\": 1736945785680,\n            \"month\": 1,\n            \"year\": 2025\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Expenses",
+			"item": [
+				{
+					"name": "Add Expense",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfdXNlcl9pZCI6IjY3ODI3NjEzMjUwODU2OWVhNjg2OWE2ZCIsIm5hbWUiOiJPdGhtYW4gTS4gTy4gU2hiZWlyMTIiLCJpYXQiOjE3MzY5MzczMTMsImV4cCI6MTczNjk3MzMxM30.n_XijBAzcLD-WOVaoBacKArIwZw9X-rimCrk641W3DQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 20,\n    \"type\": \"food\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9099/expense/add",
+							"host": [
+								"localhost"
+							],
+							"port": "9099",
+							"path": [
+								"expense",
+								"add"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Expense Successful",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 1000,\n    \"type\": \"rent\"\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:9099/expense/add",
+									"host": [
+										"localhost"
+									],
+									"port": "9099",
+									"path": [
+										"expense",
+										"add"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "237"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ed-eA2Mw6+eYVvlPsckLUKtSoHGNgo\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Jan 2025 13:13:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": {\n        \"status\": true,\n        \"message\": \"Expense inserted successfully\"\n    },\n    \"data\": {\n        \"expense\": {\n            \"amount\": 1000,\n            \"type\": \"rent\",\n            \"_user_id\": \"6787b3abb01af6e9405f7f9b\",\n            \"month\": 1,\n            \"year\": 2025,\n            \"created_at\": 1736946484307,\n            \"_id\": \"6787b493b01af6e9405f7f9f\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Show Current Month Expenses",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "Show Current Month Expenses Successful",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:9099/expense/currentMonthExpenses?page=1",
+									"host": [
+										"localhost"
+									],
+									"port": "9099",
+									"path": [
+										"expense",
+										"currentMonthExpenses"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "550"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"226-nuSj9UHlptk8Lqbrya6gt90tneE\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Jan 2025 13:14:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": {\n        \"status\": true,\n        \"message\": \"\"\n    },\n    \"data\": [\n        {\n            \"_id\": \"6787b423b01af6e9405f7f9d\",\n            \"amount\": 50,\n            \"type\": \"food\",\n            \"_user_id\": \"6787b3abb01af6e9405f7f9b\",\n            \"month\": 1,\n            \"year\": 2025,\n            \"created_at\": 1736946484307\n        },\n        {\n            \"_id\": \"6787b484b01af6e9405f7f9e\",\n            \"amount\": 100,\n            \"type\": \"food\",\n            \"_user_id\": \"6787b3abb01af6e9405f7f9b\",\n            \"month\": 1,\n            \"year\": 2025,\n            \"created_at\": 1736946484307\n        },\n        {\n            \"_id\": \"6787b493b01af6e9405f7f9f\",\n            \"amount\": 1000,\n            \"type\": \"rent\",\n            \"_user_id\": \"6787b3abb01af6e9405f7f9b\",\n            \"month\": 1,\n            \"year\": 2025,\n            \"created_at\": 1736946484307\n        }\n    ],\n    \"metaData\": {\n        \"pagesCount\": 1,\n        \"currentPage\": 1,\n        \"offset\": 5\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Show Current Month Total Statistics",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfdXNlcl9pZCI6IjY3ODI3NjEzMjUwODU2OWVhNjg2OWE2ZCIsIm5hbWUiOiJPdGhtYW4gTS4gTy4gU2hiZWlyMTIiLCJpYXQiOjE3MzY5MzQ5MDQsImV4cCI6MTczNjk3MDkwNH0.kS3vlsYDEcWsixt2at7A3lDVLTbbbxdSvlHVk59aoAM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9099/expense/currentMonthTotalStatistics",
+							"host": [
+								"localhost"
+							],
+							"port": "9099",
+							"path": [
+								"expense",
+								"currentMonthTotalStatistics"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Show Current Month Total Statistics Successful",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:9099/expense/currentMonthTotalStatistics",
+									"host": [
+										"localhost"
+									],
+									"port": "9099",
+									"path": [
+										"expense",
+										"currentMonthTotalStatistics"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "173"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ad-gyH4cWo/IigWZHnrJ3t6herUwjE\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Jan 2025 13:14:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": {\n        \"status\": true,\n        \"message\": \"\"\n    },\n    \"data\": {\n        \"currentMonthFinancialAnalysis\": {\n            \"totalExpenses\": 1150,\n            \"totalIncome\": 5000,\n            \"remainingIncome\": 3850,\n            \"averageDailyExpenses\": 37.1\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Show current Expense Type Statistics",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "Show current Expense Type Statistics Successful",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:9099/expense/currentExpenseTypeStatistics",
+									"host": [
+										"localhost"
+									],
+									"port": "9099",
+									"path": [
+										"expense",
+										"currentExpenseTypeStatistics"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "218"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"da-Wnd8k+SBktqUfi56MrXApLrfGV4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Jan 2025 13:14:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": {\n        \"status\": true,\n        \"message\": \"\"\n    },\n    \"data\": {\n        \"expensesTypesStats\": [\n            {\n                \"type\": \"food\",\n                \"totalAmount\": 150\n            },\n            {\n                \"type\": \"transportation\",\n                \"totalAmount\": 0\n            },\n            {\n                \"type\": \"medicine\",\n                \"totalAmount\": 0\n            },\n            {\n                \"type\": \"rent\",\n                \"totalAmount\": 1000\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

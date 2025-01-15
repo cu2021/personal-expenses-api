@@ -11,7 +11,7 @@ class Income {
       try {
         // Check if income already exists for the same user, month, and year
         const existingIncome = await collection.findOne({
-          userId: this.incomeData.userId,
+          _user_id: this.incomeData._user_id,
           month: this.incomeData.month,
           year: this.incomeData.year,
         });

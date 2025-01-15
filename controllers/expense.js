@@ -66,8 +66,8 @@ const getCurrentMonthExpenses = async (req, res, next) => {
           .then((result) => {
             if (result.status) {
               return returnJson(res, 200, result.status, "", result.data, {
-                pages_count: getPagesCount.pagesCount,
-                current_page: pageNum,
+                pagesCount: getPagesCount.pagesCount,
+                currentPage: pageNum,
                 offset: limit,
               });
             }
@@ -173,13 +173,9 @@ const getExpenseTypeStatistics = async (req, res, next) => {
       });
 
       // return the updated statistics
-      return returnJson(
-        res,
-        200,
-        true,
-        "expense type statistics retrieved successfully",
-        { statistics: typeStatsWithDefaults }
-      );
+      return returnJson(res, 200, true, "", {
+        expensesTypesStats: typeStatsWithDefaults,
+      });
     } else {
       return next(
         createError(404, "no statistics found for the current month")

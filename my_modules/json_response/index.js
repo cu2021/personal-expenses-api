@@ -1,4 +1,4 @@
-const returnJson = (res, statusCode, status, message, data, meta_data) => {
+const returnJson = (res, statusCode, status, message, data, metaData) => {
   const payload = {
     status: {
       status: status,
@@ -7,8 +7,8 @@ const returnJson = (res, statusCode, status, message, data, meta_data) => {
     data: data,
   }
 
-  if (meta_data) {
-  payload.meta_data = meta_data;
+  if (metaData) {
+  payload.metaData = metaData;
 }
   return res.status(statusCode).json(payload);
 };

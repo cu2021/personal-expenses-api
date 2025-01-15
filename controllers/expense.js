@@ -1,5 +1,5 @@
 const { ObjectId } = require("bson");
-const { Expense } = require("../models");
+const { Expense, Income } = require("../models");
 const createError = require("http-errors");
 
 const addExpense = (req, res, next) => {
@@ -39,7 +39,7 @@ const getCurrentMonthExpenses = async (req, res, next) => {
   const year = new Date().getFullYear();
 
   //get the user id from auth
-  const _user_id = req._user_id;
+  const _user_id = new ObjectId(req._user_id);
 
   //check the page number ti be not empty
   if (isNaN(pageNum)) {
@@ -58,7 +58,6 @@ const getCurrentMonthExpenses = async (req, res, next) => {
       year,
       limit
     );
-
 
     if (getPagesCount.status) {
       //check the inserted page number is not larger than the total pages number
@@ -86,4 +85,64 @@ const getCurrentMonthExpenses = async (req, res, next) => {
   }
 };
 
-module.exports = { addExpense, getCurrentMonthExpenses };
+const getCurrentMonthTotalStatistics = async (req, res, next) => {
+  //get the current month, and year
+  const month = new Date().getMonth() + 1;
+  const year = new Date().getFullYear();
+
+  //get the user id from auth
+  const _user_id = new ObjectId(req._user_id);
+
+  //the output object
+  currentMonthFinancialAnalysis = {};
+
+  try {
+    //get the total expenses
+    const totalExpensesAmount = await Expense.getTotalExpenses(
+      _user_id,
+      month,
+      year
+    );
+
+    //add it to the analysis object
+    currentMonthFinancialAnalysis.totalExpenses = totalExpensesAmount.total;
+
+    // get the total income amount
+    const incomeAmount = await Income.getUserMonthlyIncome(
+      _user_id,
+      month,
+      year
+    );
+
+    //add it to the analysis object
+    currentMonthFinancialAnalysis.totalIncome = incomeAmount.incomeValue;
+
+    // calculating the reamining income as:
+    // remaining = income - total expenses
+    const remainingIncome =
+      currentMonthFinancialAnalysis.totalIncome -
+      currentMonthFinancialAnalysis.totalExpenses;
+
+    // add the remaining to the analysis object.
+    currentMonthFinancialAnalysis.remainingIncome = remainingIncome;
+
+    // determine the total number of days in the month
+    const daysInMonth = new Date(year, month, 0).getDate();
+    // claculating the average daily expenses using this equation:
+    //  avg. daily expenses = total expenses / days of the month
+    const averageDailyExpenses = parseFloat(
+      (currentMonthFinancialAnalysis.totalExpenses / daysInMonth).toFixed(2)
+    );
+    // add the avg. daily expenses the analysis object
+    currentMonthFinancialAnalysis.averageDailyExpenses = averageDailyExpenses;
+    // return the resulted analysis object
+    return returnJson(res, 200, true, "", { currentMonthFinancialAnalysis });
+  } catch (err) {
+    return next(createError(500, err.message));
+  }
+};
+module.exports = {
+  addExpense,
+  getCurrentMonthExpenses,
+  getCurrentMonthTotalStatistics,
+};

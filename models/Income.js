@@ -9,11 +9,11 @@ class Income {
   save(cb) {
     dbConnection("incomes", async (collection) => {
       try {
-        // Check if income already exists for the same user and month
+        // Check if income already exists for the same user, month, and year
         const existingIncome = await collection.findOne({
           userId: this.incomeData.userId,
           month: this.incomeData.month,
-          year: this.incomeData.year
+          year: this.incomeData.year,
         });
 
         if (existingIncome) {
@@ -40,6 +40,29 @@ class Income {
           message: err.message,
         });
       }
+    });
+  }
+
+  static getUserMonthlyIncome(_user_id, month, year) {
+    return new Promise((resolve, reject) => {
+      dbConnection("incomes", async (collection) => {
+        try {
+          // get the income with the  _user_id, month, and year
+          const income = await collection.findOne({
+            _user_id: _user_id,
+            month: month,
+            year: year,
+          });
+
+          if (income) {
+            resolve({ status: true, incomeValue: income.income_value });
+          } else {
+            resolve({ status: true, incomeValue: 0 });
+          }
+        } catch (err) {
+          reject({ status: false, message: err.message });
+        }
+      });
     });
   }
 

@@ -68,6 +68,27 @@ class Expense {
     });
   }
 
+  static getTotalExpenses(_user_id, month, year) {
+    return new Promise((resolve, reject) => {
+      dbConnection("expenses", async (collection) => {
+        try {
+          const expenses = await collection
+            .find({ _user_id: _user_id, month: month, year: year })
+            .toArray();
+
+          const sum = expenses.reduce(
+            (acc, expense) => acc + (expense.amount || 0),
+            0
+          );
+
+          resolve({ status: true, total: sum });
+        } catch (err) {
+          reject({ status: false, message: err.message });
+        }
+      });
+    });
+  }
+
   static validate(expenseData) {
     try {
       const validationResult = expenseValidator.validate(expenseData);

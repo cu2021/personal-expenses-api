@@ -12,6 +12,11 @@ router
     "/currentMonthTotalStatistics",
     auth,
     expenseController.getCurrentMonthTotalStatistics
+  )
+  .get(
+    "/currentExpenseTypeStatistics",
+    auth,
+    expenseController.getExpenseTypeStatistics
   );
 
 module.exports = router;

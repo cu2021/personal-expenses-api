@@ -34,7 +34,7 @@ const getCurrentMonthExpenses = async (req, res, next) => {
   //get the page number from the query parameters
   const pageNum = parseInt(req.query.page);
   // get/define the page limit
-    const limit = parseInt(req.query.limit)|| 5;
+  const limit = parseInt(req.query.limit) || 5;
 
   //get the current month, and year
   const month = new Date().getMonth() + 1;
@@ -47,7 +47,6 @@ const getCurrentMonthExpenses = async (req, res, next) => {
   if (isNaN(pageNum)) {
     return next(createError(400, "You should send a page number"));
   }
-
 
   const skip = (pageNum - 1) * limit;
 
@@ -69,7 +68,7 @@ const getCurrentMonthExpenses = async (req, res, next) => {
               return returnJson(res, 200, result.status, "", result.data, {
                 pages_count: getPagesCount.pagesCount,
                 current_page: pageNum,
-                offset: limit
+                offset: limit,
               });
             }
           })
@@ -143,8 +142,57 @@ const getCurrentMonthTotalStatistics = async (req, res, next) => {
     return next(createError(500, err.message));
   }
 };
+
+const getExpenseTypeStatistics = async (req, res, next) => {
+  // define the possible expense types
+  const expenseTypes = ["food", "transportation", "medicine", "rent"];
+
+  // get the current month and year
+  const month = new Date().getMonth() + 1;
+  const year = new Date().getFullYear();
+
+  // get the user ID from auth
+  const _user_id = new ObjectId(req._user_id);
+
+  try {
+    // retrieve expense type statistics
+    const typesStats = await Expense.getExpenseStatisticsByType(
+      _user_id,
+      month,
+      year
+    );
+
+    if (typesStats.status) {
+      // include every expense type in the resulted aggregation
+      const typeStatsWithDefaults = expenseTypes.map((type) => {
+        const typeStat = typesStats.typeStats.find((stat) => stat._id === type);
+        return {
+          type,
+          totalAmount: typeStat ? typeStat.totalAmount : 0,
+        };
+      });
+
+      // return the updated statistics
+      return returnJson(
+        res,
+        200,
+        true,
+        "expense type statistics retrieved successfully",
+        { statistics: typeStatsWithDefaults }
+      );
+    } else {
+      return next(
+        createError(404, "no statistics found for the current month")
+      );
+    }
+  } catch (err) {
+    return next(createError(500, err.message));
+  }
+};
+
 module.exports = {
   addExpense,
   getCurrentMonthExpenses,
   getCurrentMonthTotalStatistics,
+  getExpenseTypeStatistics,
 };

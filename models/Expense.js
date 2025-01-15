@@ -89,6 +89,37 @@ class Expense {
     });
   }
 
+  static async getExpenseStatisticsByType(_user_id, month, year) {
+    return new Promise((resolve, reject) => {
+      dbConnection("expenses", async (collection) => {
+        try {
+         
+          const typeStats = await collection
+            .aggregate([
+              {
+                $match: {
+                  _user_id: _user_id,
+                  month: month,
+                  year: year,
+                },
+              },
+              {
+                $group: {
+                  _id: "$type",
+                  totalAmount: { $sum: "$amount" },
+                },
+              },
+            ])
+            .toArray();
+
+          resolve({ status: true, typeStats });
+        } catch (err) {
+          reject({ status: false, message: err.message });
+        }
+      });
+    });
+  }
+
   static validate(expenseData) {
     try {
       const validationResult = expenseValidator.validate(expenseData);

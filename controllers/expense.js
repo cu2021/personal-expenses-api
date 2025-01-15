@@ -33,6 +33,8 @@ const addExpense = (req, res, next) => {
 const getCurrentMonthExpenses = async (req, res, next) => {
   //get the page number from the query parameters
   const pageNum = parseInt(req.query.page);
+  // get/define the page limit
+    const limit = parseInt(req.query.limit)|| 5;
 
   //get the current month, and year
   const month = new Date().getMonth() + 1;
@@ -46,8 +48,7 @@ const getCurrentMonthExpenses = async (req, res, next) => {
     return next(createError(400, "You should send a page number"));
   }
 
-  // define the page limit
-  const limit = 3;
+
   const skip = (pageNum - 1) * limit;
 
   try {
@@ -68,6 +69,7 @@ const getCurrentMonthExpenses = async (req, res, next) => {
               return returnJson(res, 200, result.status, "", result.data, {
                 pages_count: getPagesCount.pagesCount,
                 current_page: pageNum,
+                offset: limit
               });
             }
           })

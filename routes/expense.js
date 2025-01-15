@@ -7,11 +7,11 @@ const router = Router();
 
 router
   .post("/add", auth, expenseController.addExpense)
+  .get("/currentMonthExpenses", auth, expenseController.getCurrentMonthExpenses)
   .get(
-    "/currentMonthExpenses",
+    "/currentMonthTotalStatistics",
     auth,
-    expenseController.getCurrentMonthExpenses
-  )
-  .get("/currentMonthTotalStatistics",auth, expenseController.getCurrentMonthTotalStatistics);
+    expenseController.getCurrentMonthTotalStatistics
+  );
 
 module.exports = router;
